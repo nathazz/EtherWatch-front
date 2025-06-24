@@ -1,12 +1,10 @@
 import { Eye, MapPin } from "lucide-react";
-import type { Theme } from "../../theme/theme";
 import React from "react";
 import type { ITransaction } from "../../../interface/interfaces";
+import { useDarkMode } from "../../../Hooks/DarkMode/useDarkMode";
 
 interface IProps {
-  theme: Theme;
   activeSection: string;
-  isDarkMode: boolean;
 }
 
 const transactions: ITransaction[] = [
@@ -30,11 +28,9 @@ const transactions: ITransaction[] = [
   },
 ];
 
-export const OptionsSideBar: React.FC<IProps> = ({
-  theme,
-  activeSection,
-  isDarkMode,
-}) => {
+export const OptionsNavigation: React.FC<IProps> = ({ activeSection }) => {
+  const { theme, isDarkMode } = useDarkMode();
+
   const renderContent = () => {
     switch (activeSection) {
       case "pending_tx":

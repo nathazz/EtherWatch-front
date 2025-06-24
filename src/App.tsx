@@ -1,7 +1,7 @@
-import EtherWatch from "./page/Home";
+import { Router } from "./routes";
 
 function App() {
-  return <EtherWatch />;
+  return <Router />;
 }
 
 export default App;

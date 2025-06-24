@@ -1,5 +1,5 @@
 import React from "react";
-import type { Theme } from "../theme/theme";
+import { useDarkMode } from "../../../Hooks/DarkMode/useDarkMode";
 
 interface NavItemProps {
   icon: React.ReactNode;
@@ -7,16 +7,16 @@ interface NavItemProps {
   id: string;
   isActive: boolean;
   onClick: () => void;
-  theme: Theme;
 }
 
-export const NavItem: React.FC<NavItemProps> = ({
+export const MenuItems: React.FC<NavItemProps> = ({
   icon,
   label,
   isActive,
   onClick,
-  theme,
 }) => {
+  const { theme } = useDarkMode();
+
   return (
     <button
       onClick={onClick}
