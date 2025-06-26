@@ -56,7 +56,7 @@ export const LoginPage: React.FC = () => {
             auto_select={false}
             onSuccess={(credentialResponse) => {
               const decodeAccount = jwtDecode(
-                credentialResponse.credential ?? " "
+                credentialResponse.credential ?? " ",
               );
               console.log(decodeAccount);
             }}

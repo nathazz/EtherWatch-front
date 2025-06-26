@@ -5,7 +5,7 @@ import {
   useMemo,
   type ReactNode,
 } from "react";
-import { getTheme, type Theme } from "../../components/theme/theme";
+import { getTheme, type Theme } from "../../theme/theme";
 
 type DarkModeContextType = {
   isDarkMode: boolean;
@@ -14,7 +14,7 @@ type DarkModeContextType = {
 };
 
 const DarkModeContext = createContext<DarkModeContextType | undefined>(
-  undefined
+  undefined,
 );
 
 const DarkModeProvider = ({ children }: { children: ReactNode }) => {

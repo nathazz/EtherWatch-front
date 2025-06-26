@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { MenuItems } from "./MenuItems";
-import { OptionsNavigation } from "./OptionsNavigation";
-import { DropDown } from "../Dropdown";
+import { OptionsNavigation } from "./Options";
 import { mainMenuItems } from "../../utils/items";
 import { DarkModeButton } from "../DarkModeButton";
 import { useDarkMode } from "../../Hooks/DarkMode/useDarkMode";
 
-export const NavigationPages: React.FC = () => {
+export const Pages: React.FC = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme } = useDarkMode();
@@ -29,7 +28,6 @@ export const NavigationPages: React.FC = () => {
           onClick={() => handleClick(item.id)}
         />
       ))}
-      <DropDown activeSection={activeSection} handleClick={handleClick} />
     </>
   );
 

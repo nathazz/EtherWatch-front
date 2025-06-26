@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationPages } from "../../components/Menu";
+import { Pages } from "../../components/Menu";
 import { useDarkMode } from "../../Hooks/DarkMode/useDarkMode";
 
 const HomePage: React.FC = () => {
@@ -7,7 +7,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className={`min-h-screen ${theme.bg} transition-colors duration-300`}>
-      <NavigationPages />
+      <Pages />
     </div>
   );
 };

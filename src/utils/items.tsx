@@ -1,4 +1,4 @@
-import { Home, MapPin, Eye, Wrench, ClipboardCheck } from "lucide-react";
+import { Home, MapPin, Eye, Wrench } from "lucide-react";
 
 export const mainMenuItems = [
   {
@@ -16,17 +16,9 @@ export const mainMenuItems = [
     label: "Balance Watch",
     icon: () => <Eye size={20} />,
   },
-];
-
-export const utilsItems = [
   {
-    id: "gas_tracker",
-    label: "Gas Tracker",
-    icon: () => <Wrench size={18} />,
-  },
-  {
-    id: "tx_decoder",
-    label: "Tx Decoder",
-    icon: () => <ClipboardCheck size={18} />,
-  },
+    id: "utils",
+    label: "Utils",
+    icon: () => <Wrench size={20} />
+  }
 ];
