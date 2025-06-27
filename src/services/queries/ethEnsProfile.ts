@@ -4,10 +4,10 @@ import type { IEnsProfile } from "../requests/ensProfile/interface";
 
 export const useQueryEnsProfile = (address: string, enabled = true) => {
   const result = useQuery<IEnsProfile>({
-    queryKey: ["ensProfile"],
+    queryKey: ["ensProfile", address],
     queryFn: () => getEnsProfile(address),
     staleTime: Infinity,
-    enabled
+    enabled:  enabled && !!address
   });
 
   return result;

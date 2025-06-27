@@ -14,35 +14,35 @@ import { isValidBlock, isValidHash } from "../../../utils/validates";
 export default function UtilsTemplate() {
   const { theme } = useDarkMode();
 
-  const [transactionHash, setTransactionHash] = useState("");
-  const [blockNumber, setBlockNumber] = useState("");
-  const [ensAddress, setEnsAddress] = useState("");
+  const [transaction, setTransaction] = useState({
+    input: "",
+    error: "",
+    queryKey: null as string | null,
+  });
 
-  const [queryTransactionKey, setQueryTransactionKey] = useState<string | null>(
-    null
-  );
-  const [queryBlockKey, setQueryBlockKey] = useState<string | null>(null);
-  const [queryEnsKey, setQueryEnsKey] = useState<string | null>(null);
+  const [block, setBlock] = useState({
+    input: "",
+    error: "",
+    queryKey: null as string | null,
+  });
 
-  const clearTransactionResult = () => setQueryTransactionKey(null);
-  const clearBlockResult = () => setQueryBlockKey(null);
-  const clearEnsResult = () => setQueryEnsKey(null);
-
-  const [transactionError, setTransactionError] = useState("");
-  const [blockError, setBlockError] = useState("");
-  const [ensError, setEnsError] = useState("");
+  const [ens, setEns] = useState({
+    input: "",
+    error: "",
+    queryKey: null as string | null,
+  });
 
   const { data: transactionData, isLoading: isLoadingTransaction } =
-    useQueryTransaction(queryTransactionKey || "", !!queryTransactionKey);
+    useQueryTransaction(transaction.queryKey || "", !!transaction.queryKey);
 
   const { data: blockData, isLoading: isLoadingBlock } = useQueryBlock(
-    queryBlockKey || "",
-    !!queryBlockKey
+    block.queryKey || "",
+    !!block.queryKey
   );
 
   const { data: ensProfileData, isLoading: isLoadingEns } = useQueryEnsProfile(
-    queryEnsKey || "",
-    !!queryEnsKey
+    ens.queryKey || "",
+    !!ens.queryKey
   );
 
   return (
@@ -61,101 +61,144 @@ export default function UtilsTemplate() {
             icon={<Search className="w-6 h-6 text-white" />}
             title="Get Transaction"
             placeholder="0x4530013..."
-            value={transactionHash}
-            onChange={setTransactionHash}
+            value={transaction.input}
+            onChange={(val) =>
+              setTransaction((prev) => ({ ...prev, input: val }))
+            }
             buttonLabel="Search Transaction"
             ringColor="ring-blue-500"
             bgColor="bg-gradient-to-r from-blue-500 to-cyan-500"
             buttonColor="from-blue-600 to-cyan-600"
             onButtonClick={() => {
-              if (!isValidHash(transactionHash)) {
-                setTransactionError("Invalid transaction hash.");
+              if (!isValidHash(transaction.input)) {
+                setTransaction((prev) => ({
+                  ...prev,
+                  error: "Invalid transaction hash.",
+                }));
                 return;
               }
 
-              setTransactionError("");
-              setQueryTransactionKey(transactionHash);
+              setTransaction((prev) => ({
+                ...prev,
+                error: "",
+                queryKey: prev.input,
+              }));
             }}
-            error={transactionError}
+            error={transaction.error}
             isLoading={isLoadingTransaction}
             copyText={
               transactionData
                 ? JSON.stringify(transactionData, null, 2)
                 : undefined
             }
-            hasQueried={!!queryTransactionKey}
+            hasQueried={!!transaction.queryKey}
             result={
               transactionData ? (
                 <TransactionDetails tx={transactionData} />
               ) : null
             }
-            onClearResult={clearTransactionResult}
-            showResult={!!queryTransactionKey}
+            onClearResult={() =>
+              setTransaction((prev) => ({ ...prev, queryKey: null }))
+            }
+            showResult={!!transaction.queryKey}
           />
 
           <UtilityCard
             icon={<Blocks className="w-6 h-6 text-white" />}
             title="Get Block"
             placeholder="22789042"
-            value={blockNumber}
-            error={blockError}
-            onChange={setBlockNumber}
+            value={block.input}
+            error={block.error}
+            onChange={(val) =>
+              setBlock((prev) => ({
+                ...prev,
+                input: val,
+              }))
+            }
             buttonLabel="Search Block"
             ringColor="ring-purple-500"
             bgColor="bg-purple-600"
             buttonColor="from-purple-600 to-indigo-600"
             onButtonClick={() => {
-              if (!isValidBlock(blockNumber)) {
-                setBlockError("Invalid Block.");
+              if (!isValidBlock(block.input)) {
+                setBlock((prev) => ({
+                  ...prev,
+                  error: "Invalid Block.",
+                }));
                 return;
               }
 
-              setBlockError("");
-              setQueryBlockKey(blockNumber);
+              setBlock((prev) => ({
+                ...prev,
+                error: "",
+                queryKey: prev.input,
+              }));
             }}
             isLoading={isLoadingBlock}
             copyText={
               blockData ? JSON.stringify(blockData, null, 2) : undefined
             }
-            hasQueried={!!queryBlockKey}
+            hasQueried={!!block.queryKey}
             result={blockData ? <BlockDetails block={blockData} /> : null}
-            onClearResult={clearBlockResult}
-            showResult={!!queryBlockKey}
+            onClearResult={() =>
+              setBlock((prev) => ({
+                ...prev,
+                queryKey: null,
+              }))
+            }
+            showResult={!!block.queryKey}
           />
 
           <UtilityCard
             icon={<User className="w-6 h-6 text-white" />}
             title="Get ENS profile"
             placeholder="0x4530013..."
-            value={ensAddress}
-            onChange={setEnsAddress}
+            value={ens.input}
+            onChange={(val) =>
+              setEns((prev) => ({
+                ...prev,
+                input: val,
+              }))
+            }
             buttonLabel="Search ENS"
             ringColor="ring-green-500"
             bgColor="bg-gradient-to-r from-green-500 to-emerald-500"
             buttonColor="from-green-600 to-emerald-600"
             onButtonClick={() => {
-              if (!ethers.isAddress(ensAddress)) {
-                setEnsError("Invalid Ethereum address.");
+              if (!ethers.isAddress(ens.input)) {
+                setEns((prev) => ({
+                  ...prev,
+                  error: "Invalid Ethereum address.",
+                }));
                 return;
               }
-              setEnsError("");
-              setQueryEnsKey(ensAddress);
+
+              setEns((prev) => ({
+                ...prev,
+                error: "",
+                queryKey: prev.input,
+              }));
             }}
-            error={ensError}
+            error={ens.error}
             isLoading={isLoadingEns}
             copyText={
               ensProfileData
                 ? JSON.stringify(ensProfileData, null, 2)
                 : undefined
             }
-            hasQueried={!!queryEnsKey}
+            hasQueried={!!ens.queryKey}
             result={
               ensProfileData ? (
                 <EnsProfileDetails profile={ensProfileData} />
               ) : null
             }
-            onClearResult={clearEnsResult}
-            showResult={!!queryEnsKey}
+            onClearResult={() =>
+              setEns((prev) => ({
+                ...prev,
+                queryKey: null,
+              }))
+            }
+            showResult={!!ens.queryKey}
           />
         </div>
       </div>

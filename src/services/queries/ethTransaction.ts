@@ -7,7 +7,7 @@ export const useQueryTransaction = (hash: string, enabled = true) => {
     queryKey: ["getTx", hash],
     queryFn: () => getTransaction(hash),
     staleTime: Infinity,
-    enabled
+    enabled: enabled && !!hash
   });
 
   return result;
