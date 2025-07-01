@@ -6,11 +6,13 @@ import { mainMenuItems } from "../../utils/items";
 import { DarkModeButton } from "../DarkModeButton";
 import { useDarkMode } from "../../Hooks/DarkMode/useDarkMode";
 import { ConnectWalletButton } from "../WalletConnect";
+import { useAuth } from "../../contexts/useAuthContext";
 
 export const OptionsPages: React.FC = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, isDarkMode } = useDarkMode();
+  const { address } = useAuth();
 
   const handleClick = (id: string) => {
     setActiveSection(id);
@@ -75,7 +77,9 @@ export const OptionsPages: React.FC = () => {
               isDarkMode ? "border-gray-700" : "border-gray-200"
             }  flex flex-col items-center gap-2`}
           >
-            <span className={`text-sm mt-2 ${theme.text}`}>connect to app</span>
+            <span className={`text-sm mt-2 ${theme.text}`}>
+              {address ? "connected!" : "Connect to the application"}
+            </span>
             <ConnectWalletButton />
           </div>
         </div>

@@ -45,7 +45,7 @@ export const UtilityCard = ({
   }, [copy]);
 
   return (
-    <div className="group bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 hover:border-white/20 shadow-xl transition-all duration-300">
+    <div className={`group p-8 ${theme.cardBg} rounded-xl border ${theme.border} ${theme.shadow} transition-all duration-300`}>
       <div className="flex items-center gap-4 mb-6">
         <div className={`p-3 rounded-xl ${bgColor}`}>{icon}</div>
         <h2 className={`text-2xl font-semibold ${theme.text}`}>{title}</h2>
