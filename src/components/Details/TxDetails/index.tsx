@@ -16,7 +16,7 @@ export function TransactionDetails({ tx }: { tx: ITransactionResponse }) {
       <Detail label="Nonce" value={tx.tx.nonce} />
       <Detail label="Block Number" value={tx.tx.blockNumber} />
       <Detail label="Type" value={tx.tx.type} />
-         <Detail label="Chain ID" value={tx.tx.chainId} />
+      <Detail label="Chain ID" value={tx.tx.chainId} />
       <Detail label="Data" value={tx.tx.data} />
       <Detail label="Signature" value={JSON.stringify(tx.tx.signature)} />
     </div>

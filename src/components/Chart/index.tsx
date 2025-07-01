@@ -32,7 +32,9 @@ export function ChangeChartCard() {
       <div
         className={`${theme.cardBg} rounded-xl p-6 ${theme.shadow} border ${theme.border}`}
       >
-        <div className={`${theme.textSecondary} text-sm font-medium mb-4`}>Market Change (24h)</div>
+        <div className={`${theme.textSecondary} text-sm font-medium mb-4`}>
+          Market Change (24h)
+        </div>
 
         {isLoading ? (
           <div className="text-center text-lg text-gray-400">Loading...</div>
@@ -45,12 +47,15 @@ export function ChangeChartCard() {
                   <YAxis
                     tickFormatter={(v) => `${v.toFixed(1)}%`}
                     stroke="#888"
-                    domain={['auto', 'auto']}
+                    domain={["auto", "auto"]}
                   />
                   <Tooltip formatter={(v: number) => `${v.toFixed(2)}%`} />
                   <Bar dataKey="value" radius={[10, 10, 0, 0]}>
                     {changeData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={getColor(entry.value)} />
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={getColor(entry.value)}
+                      />
                     ))}
                   </Bar>
                 </BarChart>
@@ -63,8 +68,12 @@ export function ChangeChartCard() {
                   key={currency}
                   className={`p-4 rounded-xl ${theme.cardBg} border ${theme.border}`}
                 >
-                  <h4 className={`text-lg font-semibold mb-2 ${theme.text}`}>{currency.toUpperCase()}</h4>
-                  <p className={`text-sm ${theme.textSecondary}`}>Market Cap:</p>
+                  <h4 className={`text-lg font-semibold mb-2 ${theme.text}`}>
+                    {currency.toUpperCase()}
+                  </h4>
+                  <p className={`text-sm ${theme.textSecondary}`}>
+                    Market Cap:
+                  </p>
                   <p className={`text-base font-medium ${theme.text}`}>
                     {marketCaps?.[currency].toLocaleString(undefined, {
                       style: "currency",
@@ -72,7 +81,9 @@ export function ChangeChartCard() {
                     }) ?? "-"}
                   </p>
 
-                  <p className={`text-sm mt-2 ${theme.textSecondary}`}>Volume (24h):</p>
+                  <p className={`text-sm mt-2 ${theme.textSecondary}`}>
+                    Volume (24h):
+                  </p>
                   <p className={`text-base font-medium ${theme.text}`}>
                     {volumes?.[currency].toLocaleString(undefined, {
                       style: "currency",

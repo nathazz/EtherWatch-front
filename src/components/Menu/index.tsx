@@ -5,11 +5,12 @@ import { OptionsNavigation } from "./Options";
 import { mainMenuItems } from "../../utils/items";
 import { DarkModeButton } from "../DarkModeButton";
 import { useDarkMode } from "../../Hooks/DarkMode/useDarkMode";
+import { ConnectWalletButton } from "../WalletConnect";
 
-export const Pages: React.FC = () => {
+export const OptionsPages: React.FC = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme } = useDarkMode();
+  const { theme, isDarkMode } = useDarkMode();
 
   const handleClick = (id: string) => {
     setActiveSection(id);
@@ -34,11 +35,12 @@ export const Pages: React.FC = () => {
   return (
     <div className={`min-h-screen ${theme.bg} transition-colors duration-300`}>
       <div
-        className={`md:hidden ${theme.sidebarBg} p-4 flex items-center justify-between ${theme.shadow} border-b ${theme.border}`}
+        className={`md:hidden ${theme.sidebarBg}  p-4 flex items-center justify-between ${theme.shadow} border-b ${theme.border}`}
       >
         <h1 className={`text-2xl font-bold ${theme.text}`}>etherWatch</h1>
         <div className="flex items-center gap-2">
           <DarkModeButton />
+          <ConnectWalletButton />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`${theme.text} cursor-pointer p-2 ${theme.hover} rounded-lg transition-colors`}
@@ -58,7 +60,7 @@ export const Pages: React.FC = () => {
 
       <div className="flex">
         <div
-          className={`hidden md:block w-72 ${theme.sidebarBg} min-h-screen fixed left-0 top-0 ${theme.shadow} border-r ${theme.border}`}
+          className={`hidden md:flex flex-col justify-between w-72 ${theme.sidebarBg} min-h-screen fixed left-0 top-0 ${theme.shadow} border-r ${theme.border}`}
         >
           <div className="p-6">
             <div className="flex items-center justify-between mb-8">
@@ -66,6 +68,15 @@ export const Pages: React.FC = () => {
               <DarkModeButton />
             </div>
             <nav className="space-y-3">{renderMenuItems()}</nav>
+          </div>
+
+          <div
+            className={`p-6 border-t ${
+              isDarkMode ? "border-gray-700" : "border-gray-200"
+            }  flex flex-col items-center gap-2`}
+          >
+            <span className={`text-sm mt-2 ${theme.text}`}>connect to app</span>
+            <ConnectWalletButton />
           </div>
         </div>
 

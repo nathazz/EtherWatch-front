@@ -7,7 +7,7 @@ export const useQueryBlock = (block: string, enabled = true) => {
     queryKey: ["ethBlock", block],
     queryFn: () => getBlock(block),
     staleTime: Infinity,
-    enabled:  enabled && !!block
+    enabled: enabled && !!block,
   });
 
   return result;

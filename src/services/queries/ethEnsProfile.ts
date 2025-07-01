@@ -7,7 +7,7 @@ export const useQueryEnsProfile = (address: string, enabled = true) => {
     queryKey: ["ensProfile", address],
     queryFn: () => getEnsProfile(address),
     staleTime: Infinity,
-    enabled:  enabled && !!address
+    enabled: enabled && !!address,
   });
 
   return result;

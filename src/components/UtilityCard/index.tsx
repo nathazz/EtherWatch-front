@@ -19,11 +19,9 @@ export const UtilityCard = ({
   hasQueried,
   copyText,
   onClearResult,
-  showResult,
   error,
 }: UtilityCardProps & {
   onClearResult: () => void;
-  showResult: boolean;
 }) => {
   const { theme } = useDarkMode();
 
@@ -61,7 +59,7 @@ export const UtilityCard = ({
         className={`w-full border border-slate-600/50 rounded-xl px-4 py-4 ${theme.text} focus:outline-none focus:ring-2 ${ringColor} focus:border-transparent transition-all duration-300 text-base`}
       />
       {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
-      
+
       <button
         disabled={isButtonDisabled}
         onClick={onButtonClick}
@@ -83,7 +81,7 @@ export const UtilityCard = ({
           <p className="text-gray-400">No data found.</p>
         )}
 
-        {!isLoading && result && showResult && (
+        {!isLoading && result && hasQueried && (
           <div className="relative">
             <div className="p-4 rounded-md border border-white/10 bg-black/10 mt-4">
               {result}

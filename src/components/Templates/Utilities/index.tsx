@@ -37,12 +37,12 @@ export default function UtilsTemplate() {
 
   const { data: blockData, isLoading: isLoadingBlock } = useQueryBlock(
     block.queryKey || "",
-    !!block.queryKey
+    !!block.queryKey,
   );
 
   const { data: ensProfileData, isLoading: isLoadingEns } = useQueryEnsProfile(
     ens.queryKey || "",
-    !!ens.queryKey
+    !!ens.queryKey,
   );
 
   return (
@@ -100,7 +100,6 @@ export default function UtilsTemplate() {
             onClearResult={() =>
               setTransaction((prev) => ({ ...prev, queryKey: null }))
             }
-            showResult={!!transaction.queryKey}
           />
 
           <UtilityCard
@@ -146,7 +145,6 @@ export default function UtilsTemplate() {
                 queryKey: null,
               }))
             }
-            showResult={!!block.queryKey}
           />
 
           <UtilityCard
@@ -198,7 +196,6 @@ export default function UtilsTemplate() {
                 queryKey: null,
               }))
             }
-            showResult={!!ens.queryKey}
           />
         </div>
       </div>
