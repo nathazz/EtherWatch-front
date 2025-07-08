@@ -1,4 +1,4 @@
-import { Home, Wrench, Cctv, HandCoins } from "lucide-react";
+import { Home, Wrench, Cctv, BookOpenText } from "lucide-react";
 
 export const mainMenuItems = [
   {
@@ -7,14 +7,14 @@ export const mainMenuItems = [
     icon: () => <Home size={20} />,
   },
   {
+    id: "eth_infos",
+    label: "Ethereum Infos",
+    icon: () => <BookOpenText size={20} />,
+  },
+  {
     id: "pending_tx",
     label: "Pending TX Watch",
     icon: () => <Cctv size={20} />,
-  },
-  {
-    id: "balance_watch",
-    label: "Balance Watch",
-    icon: () => <HandCoins size={20} />,
   },
   {
     id: "utils",

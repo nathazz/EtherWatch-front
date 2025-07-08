@@ -11,13 +11,13 @@ export interface Theme {
 }
 
 export const getTheme = (isDarkMode: boolean): Theme => ({
-  bg: isDarkMode ? "bg-slate-900" : "bg-gray-50",
-  cardBg: isDarkMode ? "bg-slate-800" : "bg-white",
-  sidebarBg: isDarkMode ? "bg-slate-800" : "bg-white",
-  text: isDarkMode ? "text-white" : "text-gray-900",
-  textSecondary: isDarkMode ? "text-slate-400" : "text-gray-600",
-  border: isDarkMode ? "border-slate-700" : "border-gray-200",
-  hover: isDarkMode ? "hover:bg-slate-700" : "hover:bg-gray-100",
-  active: isDarkMode ? "bg-slate-700" : "bg-blue-100",
-  shadow: isDarkMode ? "" : "shadow-lg",
+  bg: isDarkMode ? "bg-[#0e1117]" : "bg-slate-50",
+  cardBg: isDarkMode ? "bg-[#161b22]" : "bg-white",
+  sidebarBg: isDarkMode ? "bg-[#1c2128]" : "bg-slate-100",
+  text: isDarkMode ? "text-slate-100" : "text-slate-800",
+  textSecondary: isDarkMode ? "text-slate-400" : "text-slate-500",
+  border: isDarkMode ? "border-slate-700" : "border-slate-300",
+  hover: isDarkMode ? "hover:bg-[#21262d]" : "hover:bg-slate-200",
+  active: isDarkMode ? "bg-[#30363d]" : "bg-slate-200",
+  shadow: isDarkMode ? "shadow-xl shadow-black/50" : "shadow-md",
 });

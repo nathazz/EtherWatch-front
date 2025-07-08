@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { getMetaMaskProvider } from "../services/MetaMask/metaMaskService";
-import { logoutMetaMask } from "../services/requests/loginMetaMask/login";
-import { checkAuth } from "../services/requests/checkAuth/checkAuth";
-import { AuthContext } from "./useAuthContext";
+import { getMetaMaskProvider } from "../../services/MetaMask/metaMaskService";
+import { logoutMetaMask } from "../../services/requests/loginMetaMask/login";
+import { checkAuth } from "../../services/requests/checkAuth/checkAuth";
 import { ethers } from "ethers";
+import { AuthContext } from "./useAuthContext";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [address, setAddress] = useState<string | null>(null);
@@ -54,9 +54,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     checkLogin();
   }, [checkLogin]);
 
+  const sendTransaction = useCallback(async (to: string, value: string) => {
+    try {
+      const { provider } = await getMetaMaskProvider();
+      const signer = await provider.getSigner();
+      const validAddress = ethers.getAddress(to);
+
+      const tx = await signer.sendTransaction({
+        to: validAddress,
+        value: ethers.parseEther(value),
+      });
+
+      return tx;
+    } catch (err) {
+      console.error("Send Transaction failed", err);
+      throw err;
+    }
+  }, []);
+
   return (
     <AuthContext.Provider
-      value={{ address, balance, login, logout, isLoading }}
+      value={{ address, balance, login, logout, isLoading, sendTransaction }}
     >
       {children}
     </AuthContext.Provider>

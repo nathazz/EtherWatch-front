@@ -6,7 +6,7 @@ import { mainMenuItems } from "../../utils/items";
 import { DarkModeButton } from "../DarkModeButton";
 import { useDarkMode } from "../../Hooks/DarkMode/useDarkMode";
 import { ConnectWalletButton } from "../WalletConnect";
-import { useAuth } from "../../contexts/useAuthContext";
+import { useAuth } from "../../contexts/Auth/useAuthContext";
 
 export const OptionsPages: React.FC = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -42,7 +42,7 @@ export const OptionsPages: React.FC = () => {
         <h1 className={`text-2xl font-bold ${theme.text}`}>etherWatch</h1>
         <div className="flex items-center gap-2">
           <DarkModeButton />
-          <ConnectWalletButton />
+          <ConnectWalletButton isMenuOpen={isMobileMenuOpen} />
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`${theme.text} cursor-pointer p-2 ${theme.hover} rounded-lg transition-colors`}

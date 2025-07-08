@@ -1,3 +1,4 @@
+import { Detail } from "..";
 import { useDarkMode } from "../../../Hooks/DarkMode/useDarkMode";
 import type { ITransactionResponse } from "../../../services/requests/transactions/interface";
 
@@ -19,20 +20,6 @@ export function TransactionDetails({ tx }: { tx: ITransactionResponse }) {
       <Detail label="Chain ID" value={tx.tx.chainId} />
       <Detail label="Data" value={tx.tx.data} />
       <Detail label="Signature" value={JSON.stringify(tx.tx.signature)} />
-    </div>
-  );
-}
-
-function Detail({ label, value }: { label: string; value: string | number }) {
-  const { theme } = useDarkMode();
-  return (
-    <div className="flex flex-col">
-      <span
-        className={`uppercase text-xs font-semibold ${theme.textSecondary}`}
-      >
-        {label}
-      </span>
-      <span className={`break-all font-medium`}>{value}</span>
     </div>
   );
 }

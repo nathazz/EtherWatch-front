@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Blocks, User } from "lucide-react";
+import { Search, Blocks, User, CircleDollarSign } from "lucide-react";
 import { useDarkMode } from "../../../Hooks/DarkMode/useDarkMode";
 import { useQueryTransaction } from "../../../services/queries/ethTransaction";
 import { useQueryBlock } from "../../../services/queries/ethGetBlock";
@@ -10,6 +10,8 @@ import { BlockDetails } from "../../Details/BlockDetails";
 import { EnsProfileDetails } from "../../Details/EnsDetails";
 import { ethers } from "ethers";
 import { isValidBlock, isValidHash } from "../../../utils/validates";
+import { useQueryBalance } from "../../../services/queries/getBalance";
+import { BalanceDetail } from "../../Details/BalanceDetails";
 
 export default function UtilsTemplate() {
   const { theme } = useDarkMode();
@@ -32,6 +34,12 @@ export default function UtilsTemplate() {
     queryKey: null as string | null,
   });
 
+  const [balance, setBalance] = useState({
+    input: "",
+    error: "",
+    queryKey: null as string | null,
+  });
+
   const { data: transactionData, isLoading: isLoadingTransaction } =
     useQueryTransaction(transaction.queryKey || "", !!transaction.queryKey);
 
@@ -43,6 +51,11 @@ export default function UtilsTemplate() {
   const { data: ensProfileData, isLoading: isLoadingEns } = useQueryEnsProfile(
     ens.queryKey || "",
     !!ens.queryKey,
+  );
+
+  const { data: balanceData, isLoading: isLoadingBalance } = useQueryBalance(
+    balance.queryKey || "",
+    !!balance.queryKey,
   );
 
   return (
@@ -67,7 +80,7 @@ export default function UtilsTemplate() {
             }
             buttonLabel="Search Transaction"
             ringColor="ring-blue-500"
-            bgColor="bg-gradient-to-r from-blue-500 to-cyan-500"
+            bgColor="bg-blue-500"
             buttonColor="from-blue-600 to-cyan-600"
             onButtonClick={() => {
               if (!isValidHash(transaction.input)) {
@@ -99,6 +112,44 @@ export default function UtilsTemplate() {
             }
             onClearResult={() =>
               setTransaction((prev) => ({ ...prev, queryKey: null }))
+            }
+          />
+
+          <UtilityCard
+            icon={<CircleDollarSign className="w-6 h-6 text-white" />}
+            title="Get Balance"
+            placeholder="0x4530013..."
+            value={balance.input}
+            onChange={(val) => setBalance((prev) => ({ ...prev, input: val }))}
+            buttonLabel="Search Balance"
+            ringColor="ring-yellow-500"
+            bgColor="bg-yellow-500"
+            buttonColor="bg-yellow-500"
+            onButtonClick={() => {
+              if (!ethers.isAddress(balance.input)) {
+                setBalance((prev) => ({
+                  ...prev,
+                  error: "Invalid Ethereum address.",
+                }));
+                return;
+              }
+              setBalance((prev) => ({
+                ...prev,
+                error: "",
+                queryKey: prev.input,
+              }));
+            }}
+            error={balance.error}
+            isLoading={isLoadingBalance}
+            copyText={
+              balanceData ? JSON.stringify(balanceData, null, 2) : undefined
+            }
+            hasQueried={!!balance.queryKey}
+            result={
+              balanceData ? <BalanceDetail balance={balanceData} /> : null
+            }
+            onClearResult={() =>
+              setBalance((prev) => ({ ...prev, queryKey: null }))
             }
           />
 
@@ -160,7 +211,7 @@ export default function UtilsTemplate() {
             }
             buttonLabel="Search ENS"
             ringColor="ring-green-500"
-            bgColor="bg-gradient-to-r from-green-500 to-emerald-500"
+            bgColor="bg-green-500"
             buttonColor="from-green-600 to-emerald-600"
             onButtonClick={() => {
               if (!ethers.isAddress(ens.input)) {

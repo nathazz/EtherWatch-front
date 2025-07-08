@@ -1,3 +1,4 @@
+import { Detail } from "..";
 import { useDarkMode } from "../../../Hooks/DarkMode/useDarkMode";
 import type { IBlockResponse } from "../../../services/requests/block/interface";
 
@@ -25,20 +26,6 @@ export function BlockDetails({ block }: { block: IBlockResponse }) {
         label="Transactions Count"
         value={block.block.transactions.length}
       />
-    </div>
-  );
-}
-
-function Detail({ label, value }: { label: string; value: string | number }) {
-  const { theme } = useDarkMode();
-  return (
-    <div className="flex flex-col">
-      <span
-        className={`uppercase text-xs font-semibold ${theme.textSecondary}`}
-      >
-        {label}
-      </span>
-      <span className={`break-all font-medium`}>{value}</span>
     </div>
   );
 }

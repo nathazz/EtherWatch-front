@@ -29,7 +29,7 @@ export async function getMetaMaskProvider() {
 
   const provider = new BrowserProvider(window.ethereum);
 
-  provider.on("network", (oldNetwork) => {
+  provider.on("network", (_newNetwork, oldNetwork) => {
     if (oldNetwork) window.location.reload();
   });
 

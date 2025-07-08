@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../../contexts/useAuthContext";
+import { useAuth } from "../../contexts/Auth/useAuthContext";
 import { useDarkMode } from "../../Hooks/DarkMode/useDarkMode";
-import { LogOut } from "lucide-react";
+import { BanknoteArrowUp, LogOut } from "lucide-react";
+import { SendTransactionFields } from "../SendTransaction";
 
-export const ConnectWalletButton = () => {
+interface IProps {
+  isMenuOpen?: boolean;
+}
+
+export const ConnectWalletButton: React.FC<IProps> = ({ isMenuOpen }) => {
   const { address, login, logout, isLoading, balance } = useAuth();
   const { theme } = useDarkMode();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showSendFields, setShowSendFields] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 767);
@@ -15,6 +21,12 @@ export const ConnectWalletButton = () => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsModalOpen(false);
+    }
+  }, [isMenuOpen]);
 
   const handleConnect = async () => {
     await login();
@@ -62,7 +74,7 @@ export const ConnectWalletButton = () => {
           {isModalOpen && (
             <div
               className={`
-                absolute z-20
+                absolute z-50
                 ${theme.bg} ${theme.text} border ${theme.border}
                 p-4 rounded-xl shadow-lg text-sm w-64
                 left-1/2 -translate-x-1/2
@@ -73,6 +85,28 @@ export const ConnectWalletButton = () => {
               <p className="text-xs text-gray-500 mt-1">
                 Balance: {balance ?? "-"} ETH
               </p>
+              <>
+                {showSendFields ? (
+                  <SendTransactionFields
+                    onCancel={() => setShowSendFields(false)}
+                  />
+                ) : (
+                  <button
+                    onClick={() => setShowSendFields(true)}
+                    className={`
+              mt-3 w-full px-4 py-2 rounded-lg border
+              cursor-pointer
+              flex items-center justify-center gap-2
+              ${theme.hover} ${theme.text} ${theme.border}
+              transition-colors duration-200
+            `}
+                  >
+                    <BanknoteArrowUp size={15} />
+                    Send Transaction
+                  </button>
+                )}
+              </>
+
               <button
                 onClick={handleLogout}
                 className={`

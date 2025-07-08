@@ -5,9 +5,9 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 
-import { DarkModeProvider } from "./Hooks/DarkMode/DarkModeContext.tsx";
+import { DarkModeProvider } from "./contexts/DarkModeContext/DarkModeContext.tsx";
 import { queryClient } from "./lib/react-query.tsx";
-import { AuthProvider } from "./contexts/AuthContext.tsx";
+import { AuthProvider } from "./contexts/Auth/AuthContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
