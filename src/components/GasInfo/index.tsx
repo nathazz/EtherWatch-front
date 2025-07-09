@@ -14,7 +14,7 @@ export const GasInfo = () => {
   const { theme } = useDarkMode();
   const { data: feeData, refetch, isFetching } = useQueryGasFee();
 
-  const [secondsLeft, setSecondsLeft] = useState(30);
+  const [secondsLeft, setSecondsLeft] = useState(35);
   const gasLevel = getGasLevel(feeData?.gasPrice);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const GasInfo = () => {
       setSecondsLeft((prev) => {
         if (prev === 1) {
           refetch().then(() => {
-            setSecondsLeft(30);
+            setSecondsLeft(35);
           });
           return 0;
         }
