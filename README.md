@@ -30,6 +30,11 @@ This is the frontend only. Backend services must be running and publicly availab
 
 To run locally:
 
+You need to start the container from EtherWatch-Backend, check: 
+[Back-End Repository](https://github.com/nathazz/EtherWatch-backend)
+
+And 
+
 ```bash
 npm install
 npm run dev
