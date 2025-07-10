@@ -45,17 +45,17 @@ export default function UtilsTemplate() {
 
   const { data: blockData, isLoading: isLoadingBlock } = useQueryBlock(
     block.queryKey || "",
-    !!block.queryKey,
+    !!block.queryKey
   );
 
   const { data: ensProfileData, isLoading: isLoadingEns } = useQueryEnsProfile(
     ens.queryKey || "",
-    !!ens.queryKey,
+    !!ens.queryKey
   );
 
   const { data: balanceData, isLoading: isLoadingBalance } = useQueryBalance(
     balance.queryKey || "",
-    !!balance.queryKey,
+    !!balance.queryKey
   );
 
   return (
@@ -111,7 +111,7 @@ export default function UtilsTemplate() {
               ) : null
             }
             onClearResult={() =>
-              setTransaction((prev) => ({ ...prev, queryKey: null }))
+              setTransaction((prev) => ({ ...prev, queryKey: null, input: "" }))
             }
           />
 
@@ -149,7 +149,7 @@ export default function UtilsTemplate() {
               balanceData ? <BalanceDetail balance={balanceData} /> : null
             }
             onClearResult={() =>
-              setBalance((prev) => ({ ...prev, queryKey: null }))
+              setBalance((prev) => ({ ...prev, queryKey: null, input: "" }))
             }
           />
 
@@ -194,6 +194,7 @@ export default function UtilsTemplate() {
               setBlock((prev) => ({
                 ...prev,
                 queryKey: null,
+                input: "",
               }))
             }
           />
@@ -245,6 +246,7 @@ export default function UtilsTemplate() {
               setEns((prev) => ({
                 ...prev,
                 queryKey: null,
+                input: "",
               }))
             }
           />
