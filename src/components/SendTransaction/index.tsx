@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BanknoteArrowUp } from "lucide-react";
 import { useDarkMode } from "../../Hooks/DarkMode/useDarkMode";
 import { useAuth } from "../../contexts/Auth/useAuthContext";
-import { isAddress } from "ethers"; // ← AQUI
+import { isAddress } from "ethers"; 
 
 interface Props {
   onCancel: () => void;
