@@ -21,14 +21,13 @@ export const Tooltip: React.FC<IProps> = ({ value, children }) => {
     const tooltipRect = tooltipRef.current.getBoundingClientRect();
     const margin = 1;
 
-
     let left = targetRect.left + targetRect.width / 2;
     const halfTooltip = tooltipRect.width / 2;
 
     left = Math.max(left, halfTooltip + margin);
     left = Math.min(left, window.innerWidth - halfTooltip - margin);
 
-   const top = targetRect.top - tooltipRect.height; 
+    const top = targetRect.top - tooltipRect.height;
 
     setPosition({ top, left });
   }, [visible]);
@@ -63,11 +62,12 @@ export const Tooltip: React.FC<IProps> = ({ value, children }) => {
             <div
               className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent"
               style={{
-                borderTopColor: theme.cardBg === "bg-white" ? "#ffffff" : "#1f2937",
+                borderTopColor:
+                  theme.cardBg === "bg-white" ? "#ffffff" : "#1f2937",
               }}
             />
           </div>,
-          document.getElementById("tooltip-root")!
+          document.getElementById("tooltip-root")!,
         )}
     </>
   );

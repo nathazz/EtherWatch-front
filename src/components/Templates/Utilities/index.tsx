@@ -45,17 +45,17 @@ export default function UtilsTemplate() {
 
   const { data: blockData, isLoading: isLoadingBlock } = useQueryBlock(
     block.queryKey || "",
-    !!block.queryKey
+    !!block.queryKey,
   );
 
   const { data: ensProfileData, isLoading: isLoadingEns } = useQueryEnsProfile(
     ens.queryKey || "",
-    !!ens.queryKey
+    !!ens.queryKey,
   );
 
   const { data: balanceData, isLoading: isLoadingBalance } = useQueryBalance(
     balance.queryKey || "",
-    !!balance.queryKey
+    !!balance.queryKey,
   );
 
   return (

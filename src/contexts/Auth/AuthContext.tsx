@@ -4,6 +4,7 @@ import { logoutMetaMask } from "../../services/requests/loginMetaMask/login";
 import { checkAuth } from "../../services/requests/checkAuth/checkAuth";
 import { ethers } from "ethers";
 import { AuthContext } from "./useAuthContext";
+import { toast } from "react-toastify";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [address, setAddress] = useState<string | null>(null);
@@ -20,8 +21,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const { address, provider } = await getMetaMaskProvider();
       setAddress(address);
       await fetchExtraData(provider, address);
-    } catch (err) {
-      console.error("Login failed", err);
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error && err.message
+          ? err.message
+          : "Login failed. Please try again.";
+
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
+
+      console.error("Login failed", err instanceof Error ? err.message : err);
     }
   }, []);
 
@@ -30,8 +42,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       await logoutMetaMask();
       setAddress(null);
       setBalance(null);
-    } catch (err) {
-      console.error("Logout failed", err);
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error && err.message
+          ? err.message
+          : "Logout failed. Please try again.";
+
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "colored",
+      });
+
+      console.error("Logout failed", err instanceof Error ? err.message : err);
     }
   }, []);
 

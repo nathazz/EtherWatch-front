@@ -3,6 +3,7 @@
 etherWatch is a frontend application for monitoring the Ethereum network. It provides real-time data such as gas prices, market information, Ethereum metadata, and live pending transactions via WebSockets.
 
 ## Features
+
 - Connect to Metamask and realize transactions and view balance
 - View current gas prices and historical trends
 - Access Ethereum price and market data
@@ -13,7 +14,6 @@ etherWatch is a frontend application for monitoring the Ethereum network. It pro
   - Get specific transaction details
   - Fetch ENS profiles
   - Get a specific Block
-    
 
 ## Technologies
 
@@ -30,11 +30,12 @@ This is the frontend only. Backend services must be running and publicly availab
 
 To run locally:
 
-You need to start the container from EtherWatch-Backend, check: 
+You need to start the container from EtherWatch-Backend, check:
 [Back-End Repository](https://github.com/nathazz/EtherWatch-backend)
 
-And 
+And
 
 ```bash
 npm install
 npm run dev
+```
