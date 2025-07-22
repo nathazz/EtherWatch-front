@@ -39,6 +39,3 @@ And
 npm install
 npm run dev
 ```
-
-### loom
-https://www.loom.com/share/ab79c4fd527248af8949741eea1a89a4?sid=9bd4df55-440e-4df4-a318-1d57dc6014ed
