@@ -1,6 +1,6 @@
 # etherWatch
 
-etherWatch is a frontend application for monitoring the Ethereum network. It provides real-time data such as gas prices, market information, Ethereum metadata, and live pending transactions via WebSockets.
+etherWatch is an application for monitoring the Ethereum network. It provides real-time data, including gas prices, market information, Ethereum metadata, and live pending transactions, via WebSockets.
 
 ## Features
 
